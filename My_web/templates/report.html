@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<div class = "row">
+
+  <div class="col-lg-3 mx-auto bg-secondary">
+
+  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+    The current link item
+  </a>
+  <a href="upload" class="list-group-item list-group-item-action">Generate ECL</a>
+  <a href="view_report" class="list-group-item list-group-item-action">View ECL Report</a>
+  <!--<a href="#" class="list-group-item list-group-item-action">A fourth link item</a>-->
+  <!--<a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>-->
+</div>
+
+  </div>
+
+    <div class="col-lg-9 mx-auto " >
+        <br>
+<!--        <div>-->
+<!--            <form action='regre' method='GET'>-->
+<!--                <button type='submit'>Start Regression</button>-->
+<!--            </form>-->
+<!--    </div>-->
+<!--        <br>-->
+        {% if report %}
+      <strong>ECL Summary : {{date}}</strong>
+        <br>
+        {% if mev %}
+        <strong>Macroeconomic Variable Used : {{mev}}</strong>
+        {% endif %}
+<div class="table-responsive">
+    <table border = "1" cellpadding = "5" cellspacing = "5" class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+        {% for item in report %}
+            {% if forloop.first %}
+                {% for h in item %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            {% endif%}
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in report %}
+            <tr>
+                {% for key,value in item.items %}
+                    <td>{{ value}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+ </div>
+
+{% endif%}
+
+        <div>
+            <form action='download' method='GET'>
+                <button class="text-wrap border text-white bg-dark shadow-lg btn btn-primary" type='submit'>Download Result</button>
+            </form>
+        </div>
+        <div>
+            <form action='chart' method='GET'>
+                <button class="text-wrap border text-white bg-dark shadow-lg btn btn-primary" type='submit'>Show Chart</button>
+            </form>
+        </div>
+
+        </div>
+</div>
+{% endblock %}

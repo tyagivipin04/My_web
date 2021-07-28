@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-4 mt-4 border mb-4 mx-auto rounded pt-4">
+            <div class="text-center col">
+
+                <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shopping_cart_with_food_clip_art_2.svg/307px-Shopping_cart_with_food_clip_art_2.svg.png" alt=""
+                class="" style="height: 150px;">
+            <!-- <hr> -->
+            <div class="display-8">Login an Account</div>
+            <hr>
+            </div>
+            <h3 hidden class="alert alert-light border mt-4 mb-4 rounded">Login Here</h3>
+            <form action="/login" method="POST">
+
+                {% csrf_token %}
+
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                    {{message}}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">User Name</label>
+                    <input required type="text" name="username" id=""
+                    class=" form-control-sm form-control" placeholder="User Name">
+                </div>
+
+
+                <!-- password -->
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password"
+                    name="password"
+                    id=""
+                     class="form-control form-control-sm" placeholder="********">
+                </div>
+
+                <hr>
+                <div class="form-group">
+                    <input class="btn btn-sm btn-info col-lg-4" type="submit" value="Login">
+                </div>
+
+
+            </form>
+            <div>
+                {% for message in messages %}
+                <h3>{{ message }}</h3>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Login Page</title>-->
+
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;<center>&ndash;&gt;-->
+    <!--<form action="login" method='POST'>-->
+        <!--{% csrf_token %}-->
+        <!--<input type="text", name="username"placeholder="User Name"><br>-->
+        <!--<input type="password", name="password"placeholder="Password"><br><br>-->
+        <!--<input type="Submit">-->
+    <!--</form>-->
+<!--&lt;!&ndash;</center>&ndash;&gt;-->
+
+<!--<div>-->
+    <!--{% for message in messages %}-->
+    <!--<h3>{{message}} </h3>-->
+    <!--{% endfor %}-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

@@ -1,0 +1,147 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<center><h2>Welcome to ECL Home Page</h2></center>
+
+<hr/>
+<!--<center>-->
+
+<div  class = "row">
+
+  <div class="col-lg-3 mx-auto">
+
+  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+    The current link item
+  </a>
+  <a href="upload" class="list-group-item list-group-item-action">Generate ECL</a>
+  <a href="view_report" class="list-group-item list-group-item-action">View ECL Report</a>
+  <!--<a href="#" class="list-group-item list-group-item-action">A fourth link item</a>-->
+  <!--<a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>-->
+</div>
+
+  </div>
+
+  <div  class="col-lg-9 mx-auto ">
+      {% if role %}
+    <h5>Selected LOB : {{role}}</h5>
+{% endif%}
+<!--    {% for resp in role %}-->
+<!--    {{resp}}-->
+
+<!--{% endfor%}-->
+    <br/>
+
+    <style>body {font-family: Arial, sans-serif;}</style>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <!-- Fengyuan Chen's Datepicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
+    <!--<form method="post">-->
+  <!--{% csrf_token %}-->
+    <h5>Please select date</h5>
+<form action="cal" method="post">
+  {% csrf_token %}
+  <input id="datepicker"  name="date" autocomplete="off" required >
+  <input class="text-wrap border text-white shadow-sm btn btn-secondary" type="submit" value="Submit">
+</form>
+
+
+  <script>
+    $(function () {
+      $("#datepicker").datepicker( {
+    format: "mm-yyyy",
+    startView: "months",
+    minViewMode: "months"
+});
+    });
+  </script>
+
+  <!--</form>-->
+      <br><br>
+{% if result %}
+      <strong>Portfolio Details for month : {{month}}</strong>
+<!--<div class="container">-->
+      <div class="table-responsive">
+        <table border = "1" cellpadding = "5" cellspacing = "5" class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    {% for item in result %}
+                        {% if forloop.first %}
+                            {% for h in item %}
+                                <th>{{ h }}</th>
+                            {% endfor %}
+                        {% endif%}
+                    {% endfor %}
+                    </tr>
+            </thead>
+    <tbody>
+        {% for item in result %}
+            <tr>
+                {% for key,value in item.items %}
+                    <td>{{ value}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+      </div>
+<!--<div class="table-responsive">-->
+<!--<table border = "1" cellpadding = "5" cellspacing = "5" class="table table-bordered table-striped table-hover">-->
+<!--    <thead class="table-primary">-->
+<!--    <tr>-->
+<!--    <th>Bucket</th>-->
+<!--    <th>POS</th>-->
+<!--    <th>Interest overdue</th>-->
+<!--    <th>Loan outstanding</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+
+<!--<tbody>-->
+<!--    {% for i in result %}-->
+<!--    <tr>-->
+<!--        <td>{{i.Bucket}}</td>-->
+<!--        <td>{{i.POS}}</td>-->
+<!--        <td>{{i.Interest}}</td>-->
+<!--        <td>{{i.Loan}}</td>-->
+
+<!--    </tr>-->
+
+<!--    {% endfor %}-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--    </div>-->
+{% endif%}
+<!--</div>-->
+    </div>
+</div>
+
+<!--<form action="selected" method="post">-->
+    <!--{% csrf_token %}-->
+    <!--<select name="option">-->
+    <!--<option selected disabled = 'true'>&#45;&#45;Select LOB </option>-->
+    <!--{% for result in option %}-->
+    <!--<option>{{result.id}}-{{result.options}}</option>-->
+
+    <!--{% endfor %}-->
+    <!--</select>-->
+    <!--<input type="submit" value="Go"/>-->
+<!--</form>-->
+<!--&lt;!&ndash;</center>&ndash;&gt;-->
+<!--{% for user in username %}-->
+<!--{{ user }}-->
+
+<!--{% endfor %}-->
+
+<!--<br>-->
+
+<!--{% for resp in role %}-->
+<!--{{ resp }}-->
+
+<!--{% endfor %}-->
+{% endblock %}

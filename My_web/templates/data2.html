@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Bucket</title>
+</head>
+<body>
+<strong>Data from database</strong>
+<br>
+{% if data %}
+<table>
+    {% for i in data %}
+    <!--{{k}}-->
+    <!--{% for item_1, item_2 in k.items %}-->
+    <tr>
+        <td>{{ i.LD_limit}}</td>
+        <td>{{ i.bucket}}</td>
+    </tr>
+    <!--{% endfor %}-->
+    {% endfor %}
+</table>
+{% endif %}
+{% for i in data%}
+{{ i.LD_limit}}
+{{ i.bucket}}
+{{ i.stage}}
+<br>
+{% endfor %}
+</body>
+</html>

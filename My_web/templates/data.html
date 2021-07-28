@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data</title>
+</head>
+<body>
+
+<!--&lt;!&ndash;{{result}}&ndash;&gt;-->
+<strong>Table 1</strong>
+
+<div>
+<table border = "1" cellpadding = "5" cellspacing = "5">
+    <td><strong>Year</strong></td>
+    <td><strong>Historical portfolio default rates - LN</strong></td>
+    <td><strong>GDP</strong></td>
+    <td><strong>Inflation</strong></td>
+    <td><strong>Interest Rate</strong></td>
+    <td><strong>Domestic credit growth</strong></td>
+    <!--{{result}}-->
+<tbody>
+    {% for i in result %}
+    <tr>
+        <td>{{i.Year}}</td>
+        <td>{{i.Historical}}</td>
+        <td>{{i.GDP}}</td>
+        <td>{{i.Inflation}}</td>
+        <td>{{i.Interest_Rate}}</td>
+        <td>{{i.Domestic_credit_growth}}</td>
+    </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+    </div>
+
+
+
+</body>
+</html>

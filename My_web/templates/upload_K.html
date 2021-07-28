@@ -1,0 +1,60 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class = "row">
+
+  <div class="col-lg-3 mx-auto">
+
+  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+    The current link item
+  </a>
+  <a href="upload" class="list-group-item list-group-item-action">Generate ECL</a>
+  <a href="view_report" class="list-group-item list-group-item-action">View ECL Report</a>
+  <!--<a href="#" class="list-group-item list-group-item-action">A fourth link item</a>-->
+  <!--<a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>-->
+</div>
+      </div>
+
+  <div class="col-lg-9 mx-auto">
+      <br>
+      {% if messages %}
+      <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+
+      </div>
+      {% endif %}
+      <div class="container">
+      <form action="/reupload" class="inline">
+        <button class="float-left submit-button btn btn-primary" >Re-Upload file</button>
+     </form>
+      <br>
+
+      <form action='cal_view' method='GET' class="inline">
+        <button class="float-left submit-button btn btn-primary" >View ECL Result</button>
+      </form>
+      </div>
+      <br>
+      <!--<button class="btn btn-primary" type="submit">Re-Upload file</button>-->
+      <!--<form action="selected" method="post">-->
+        <!--{% csrf_token %}-->
+        <!--<select name="option">-->
+        <!--<option selected disabled = 'true'>&#45;&#45;Select LOB </option>-->
+        <!--{% for result in data %}-->
+        <!--<option>{{result}}</option>-->
+
+        <!--{% endfor %}-->
+        <!--</select>-->
+    <!--<input type="submit" value="Go"/>-->
+<!--</form>-->
+
+    <!--<h2>Show selected LOB</h2>-->
+    <!--{% for resp in data %}-->
+    <!--{{resp}}-->
+
+<!--{% endfor%}-->
+{% endblock%}

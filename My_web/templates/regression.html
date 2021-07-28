@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<div class = "row" >
+
+  <div class="col-lg-3 mx-auto">
+
+  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+    The current link item
+  </a>
+  <a href="upload" class="list-group-item list-group-item-action">Generate ECL</a>
+  <a href="view_report" class="list-group-item list-group-item-action">View ECL Report</a>
+  <!--<a href="#" class="list-group-item list-group-item-action">A fourth link item</a>-->
+  <!--<a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>-->
+</div>
+
+  </div>
+
+    <div class="col-lg-9 mx-auto">
+        <br>
+        <div>
+            <form id="regre_ID" action='regre' method='GET'>
+                <button id="sbtbtn" class="text-wrap border text-white shadow-sm btn btn-secondary" type='submit'>Start Regression</button>
+            </form>
+    </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <script>
+    $(document).ready(function () {
+
+        $("#regre_ID").submit(function (e) {
+
+            //stop submitting the form to see the disabled button effect
+<!--            e.preventDefault();-->
+
+            //disable the submit button
+            $("#sbtbtn").attr("disabled", true);
+
+            //disable a normal button
+
+
+            return true;
+
+        });
+    });
+</script>
+
+
+        <br>
+        {% if result %}
+      <strong>Historical PD Rates</strong>
+
+<div class="table-responsive">
+    <table border = "1" cellpadding = "5" cellspacing = "5" class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+        {% for item in result %}
+            {% if forloop.first %}
+                {% for h in item %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            {% endif%}
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in result %}
+            <tr>
+                {% for key,value in item.items %}
+                    <td>{{ value}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!--    <form action="selected" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <select name="option">-->
+<!--    <option selected disabled = 'true'>&#45;&#45;Select Option </option>-->
+<!--    {% for j in option %}-->
+<!--    <option>{{j }}</option>-->
+
+<!--    {% endfor %}-->
+<!--    </select>-->
+<!--    <input type="submit" value="Go"/>-->
+<!--</form>-->
+<!--<table border = "1" cellpadding = "5" cellspacing = "5" class="table table-bordered table-striped table-hover">-->
+    <!--<thead class="table-dark">-->
+    <!--<tr>-->
+    <!--<th>Year</th>-->
+    <!--<th>Historical portfolio default rates - LN</th>-->
+    <!--<th>GDP</th>-->
+    <!--<th>Inflation</th>-->
+    <!--<th>Interest Rate</th>-->
+    <!--<th>Domestic credit growth</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--&lt;!&ndash;{{result}}&ndash;&gt;-->
+<!--<tbody>-->
+    <!--{% for i in result %}-->
+    <!--<tr>-->
+        <!--<td>{{i.Year}}</td>-->
+        <!--<td>{{i.Historical}}</td>-->
+        <!--<td>{{i.GDP}}</td>-->
+        <!--<td>{{i.Inflation}}</td>-->
+        <!--<td>{{i.Interest_Rate}}</td>-->
+        <!--<td>{{i.Domestic_credit_growth}}</td>-->
+    <!--</tr>-->
+
+    <!--{% endfor %}-->
+    <!--</tbody>-->
+<!--</table>-->
+    </div>
+
+{% endif%}
+<br>
+        {% if result2 %}
+      <strong><bold>Regression Results</bold></strong>
+
+<div class="table-responsive">
+    <table border = "1" cellpadding = "5" cellspacing = "5" class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+        {% for item in result2 %}
+            {% if forloop.first %}
+                {% for h in item %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            {% endif%}
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in result2 %}
+            <tr>
+                {% for key,value in item.items %}
+                    <td>{{ value}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <form action="generate_report" method="post">
+    {% csrf_token %}
+    <select name="option">
+    <option selected disabled = 'true'>--Select Regression Variables </option>
+    {% for j in option %}
+    <option>{{j }}</option>
+
+    {% endfor %}
+    </select>
+    <input type="submit" value="Go"/>
+</form>
+<!--<table border = "1" cellpadding = "5" cellspacing = "5" class="table table-bordered table-striped table-hover">-->
+    <!--<thead class="table-dark">-->
+    <!--<tr>-->
+    <!--<th>Year</th>-->
+    <!--<th>Historical portfolio default rates - LN</th>-->
+    <!--<th>GDP</th>-->
+    <!--<th>Inflation</th>-->
+    <!--<th>Interest Rate</th>-->
+    <!--<th>Domestic credit growth</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--&lt;!&ndash;{{result}}&ndash;&gt;-->
+<!--<tbody>-->
+    <!--{% for i in result %}-->
+    <!--<tr>-->
+        <!--<td>{{i.Year}}</td>-->
+        <!--<td>{{i.Historical}}</td>-->
+        <!--<td>{{i.GDP}}</td>-->
+        <!--<td>{{i.Inflation}}</td>-->
+        <!--<td>{{i.Interest_Rate}}</td>-->
+        <!--<td>{{i.Domestic_credit_growth}}</td>-->
+    <!--</tr>-->
+
+    <!--{% endfor %}-->
+    <!--</tbody>-->
+<!--</table>-->
+    </div>
+
+{% endif%}
+    </div>
+
+{% endblock %}
